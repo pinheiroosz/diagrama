@@ -1,0 +1,64 @@
+<mxfile host="app.diagrams.net" modified="2023-10-25T16:28:06.769Z" agent="Mozilla/5.0" etag="z4Jk4X7XeZJk7QZJkXzR" version="22.0.2">
+  <diagram name="Processo de Compra - E-commerce" id="6NRZJENfjZDOtqcD3VQK">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10">
+      <root>
+        <!-- ATORES -->
+        <mxCell id="cliente" value="Cliente" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1">
+          <mxGeometry x="100" y="300" width="40" height="60"/>
+        </mxCell>
+        
+        <!-- COMPONENTES -->
+        <mxCell id="ecommerce" value="Sistema E-commerce" style="swimlane;fontStyle=1;align=center;verticalAlign=top;" vertex="1">
+          <mxGeometry x="300" y="200" width="150" height="500"/>
+        </mxCell>
+        
+        <mxCell id="gateway" value="Gateway de Pagamento" style="swimlane;fontStyle=1;align=center;verticalAlign=top;" vertex="1">
+          <mxGeometry x="550" y="200" width="150" height="500"/>
+        </mxCell>
+        
+        <mxCell id="estoque" value="Estoque" style="swimlane;fontStyle=1;align=center;verticalAlign=top;" vertex="1">
+          <mxGeometry x="800" y="200" width="150" height="500"/>
+        </mxCell>
+
+        <!-- FLUXO PRINCIPAL -->
+        <!-- 1. Adiciona produto -->
+        <mxCell id="step1" value="1. Adiciona produto ao carrinho" style="edgeStyle=none;endArrow=block;entryX=0;entryY=0.5;exitX=1;exitY=0.2;" edge="1" source="cliente" target="ecommerce"/>
+        
+        <!-- 2. Atualiza carrinho -->
+        <mxCell id="step2" value="2. Atualiza carrinho" style="edgeStyle=none;endArrow=block;entryX=1;entryY=0.3;exitX=0;exitY=0.5;" edge="1" source="ecommerce" target="cliente"/>
+        
+        <!-- 3. Finaliza compra -->
+        <mxCell id="step3" value="3. Finaliza compra (checkout)" style="edgeStyle=none;endArrow=block;entryX=0;entryY=0.5;exitX=1;exitY=0.4;" edge="1" source="cliente" target="ecommerce"/>
+        
+        <!-- 4. Solicita pagamento -->
+        <mxCell id="step4" value="4. Solicita dados de pagamento" style="edgeStyle=none;endArrow=block;entryX=1;entryY=0.5;exitX=0;exitY=0.5;" edge="1" source="ecommerce" target="cliente"/>
+        
+        <!-- 5. Insere dados -->
+        <mxCell id="step5" value="5. Insere dados de pagamento" style="edgeStyle=none;endArrow=block;entryX=0;entryY=0.5;exitX=1;exitY=0.6;" edge="1" source="cliente" target="ecommerce"/>
+        
+        <!-- 6. Envia para gateway -->
+        <mxCell id="step6" value="6. Envia solicitação de pagamento" style="edgeStyle=none;endArrow=block;entryX=0;entryY=0.7;exitX=1;exitY=0.5;" edge="1" source="ecommerce" target="gateway"/>
+        
+        <!-- 7. Confirmação -->
+        <mxCell id="step7" value="7. Confirmação do pagamento" style="edgeStyle=none;endArrow=block;entryX=1;entryY=0.5;exitX=0;exitY=0.8;" edge="1" source="gateway" target="ecommerce"/>
+        
+        <!-- DECISÃO -->
+        <mxCell id="decision" value="Pagamento aprovado?" style="rhombus;whiteSpace=wrap;" vertex="1">
+          <mxGeometry x="450" y="400" width="80" height="40"/>
+        </mxCell>
+        
+        <!-- FLUXO APROVADO -->
+        <mxCell id="step8" value="8. Verifica estoque" style="edgeStyle=none;endArrow=block;entryX=0;entryY=0.9;exitX=1;exitY=0.3;" edge="1" source="ecommerce" target="estoque"/>
+        
+        <mxCell id="step9" value="9. Confirma estoque" style="edgeStyle=none;endArrow=block;entryX=1;entryY=0.5;exitX=0;exitY=1;" edge="1" source="estoque" target="ecommerce"/>
+        
+        <mxCell id="step10" value="10. Atualiza estoque" style="edgeStyle=none;endArrow=block;entryX=0;entryY=1;exitX=1;exitY=0.7;" edge="1" source="ecommerce" target="estoque"/>
+        
+        <mxCell id="step11" value="11. Confirma compra (e-mail/tela)" style="edgeStyle=none;endArrow=block;entryX=1;entryY=1;exitX=0;exitY=0.7;" edge="1" source="ecommerce" target="cliente"/>
+        
+        <!-- FLUXO REPROVADO -->
+        <mxCell id="step12" value="12. Notifica falha no pagamento" style="edgeStyle=none;endArrow=block;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="decision" target="cliente"/>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
